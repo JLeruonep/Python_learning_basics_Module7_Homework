@@ -2,30 +2,29 @@ import collections
 import openpyxl
 import pandas as pd
 
-
-MONTH_COLLECTION =(
-   {1:'January',
-    2:'February',
-    3:'March',
-    4:'April',
-    5:'May',
-    6:'June',
-    7:'July',
-    8:'August',
-    9:'September',
-    10:'October',
-    11:'November',
-    12:'December'}
+MONTH_COLLECTION = (
+    {1: 'January',
+     2: 'February',
+     3: 'March',
+     4: 'April',
+     5: 'May',
+     6: 'June',
+     7: 'July',
+     8: 'August',
+     9: 'September',
+     10: 'October',
+     11: 'November',
+     12: 'December'}
 )
 
 
 def make_report(log_file_name, report_template_file_name, report_output_file_name):
-    '''
+    """
     :param log_file_name: имя файла логов
     :param report_template_file: имя файла-шаблона для отчета
     :param report_output_file_name: имя файла отчета
     :return: создает отчет в формате report.xlsx
-    '''
+    """
     # Чтение и анализ данных из файла excel
     df = pd.read_excel(log_file_name, sheet_name='log')
 
@@ -35,12 +34,12 @@ def make_report(log_file_name, report_template_file_name, report_output_file_nam
     sms_dict = sorted_month_sessions.to_dict()
 
     # Сортируем и суммируем строки купленных товаров по всем покупкам по месяцам. Считаем самые продаваемые товары
-    sorted_month_goods = df.groupby(df['Дата посещения'].dt.strftime('%B'))['Купленные товары'].sum()
+    sorted_month_goods = df.groupby(df['Дата посещения'].dt.strftime('%B'))['Купленные товары'].apply(','.join)
     smg_dict = sorted_month_goods.to_dict()
     sales_counter = collections.Counter((sum([val.strip().split(',') for val in smg_dict.values()], [])))
 
     # Собираем все покупки в разрезе пола в словарь и суммируем их
-    goods_dict = df.groupby(df['Пол'])['Купленные товары'].sum()
+    goods_dict = df.groupby(df['Пол'])['Купленные товары'].apply(','.join)
 
     # Открываем файл шаблона отчета report_template.xlsx
     wb = openpyxl.load_workbook(filename=report_template_file_name, data_only=True)
