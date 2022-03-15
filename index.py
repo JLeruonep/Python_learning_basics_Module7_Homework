@@ -90,13 +90,13 @@ def make_report(log_file_name, report_template_file_name, report_output_file_nam
     women_goods_list = goods_dict['ж']  # Выделяем женские покупки из словаря
     most_popular_women_goods = collections.Counter(
         women_goods_list.strip().split(',')).most_common()  # Считаем популярные покупки
-    most_popular_women_good = most_popular_women_goods[1][0]  # Берем самый популярный товар
+    most_popular_women_good = most_popular_women_goods[0][0]  # Берем самый популярный товар
     most_unpopular_women_good = most_popular_women_goods[-1][0]  # Берем самый непопулярный товар
 
     men_goods_list = goods_dict['м']  # Выделяем мужские покупки из словаря
     most_popular_men_goods = collections.Counter(
         men_goods_list.strip().split(',')).most_common()  # Считаем популярные покупки
-    most_popular_men_good = most_popular_men_goods[1][0]  # Берем самый популярный товар
+    most_popular_men_good = most_popular_men_goods[0][0]  # Берем самый популярный товар
     most_unpopular_men_good = most_popular_men_goods[-1][0]  # Берем самый непопулярный товар
 
     # Записываем полученные данные в шаблон
