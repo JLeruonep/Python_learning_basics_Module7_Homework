@@ -47,7 +47,7 @@ def make_report(log_file_name, report_template_file_name, report_output_file_nam
 
     # Выполняем запись данных в объект wb
     # Цикл для 1-го задания:
-    browser = 0  # Номер браузера в самых популярных браузерах
+    browser = 0  # Индекс браузера в самых популярных браузерах
     month_num = 1
     for row in range(5, 12):  # Строки на листе шаблона
         month_num = 1  # Столбцы на листе шаблона
@@ -67,7 +67,7 @@ def make_report(log_file_name, report_template_file_name, report_output_file_nam
         browser += 1
 
     # Цикл для 2-го задания:
-    good = 0  # Номер товара в самых популярных товарах
+    good = 0  # Индекс товара в самых популярных товарах
     month_num = 1
     for row in range(19, 26):  # Строки на листе шаблона
         month_num = 1
@@ -86,16 +86,16 @@ def make_report(log_file_name, report_template_file_name, report_output_file_nam
             month_num += 1
         good += 1
 
-        # Цикл для 3-го задания
+    # Код для 3-го задания
     women_goods_list = goods_dict['ж']  # Выделяем женские покупки из словаря
     most_popular_women_goods = collections.Counter(
-        women_goods_list.strip().split(',')).most_common()  # Считаем популярные покупки
+    women_goods_list.strip().split(',')).most_common()  # Считаем популярные покупки
     most_popular_women_good = most_popular_women_goods[0][0]  # Берем самый популярный товар
     most_unpopular_women_good = most_popular_women_goods[-1][0]  # Берем самый непопулярный товар
 
     men_goods_list = goods_dict['м']  # Выделяем мужские покупки из словаря
     most_popular_men_goods = collections.Counter(
-        men_goods_list.strip().split(',')).most_common()  # Считаем популярные покупки
+    men_goods_list.strip().split(',')).most_common()  # Считаем популярные покупки
     most_popular_men_good = most_popular_men_goods[0][0]  # Берем самый популярный товар
     most_unpopular_men_good = most_popular_men_goods[-1][0]  # Берем самый непопулярный товар
 
